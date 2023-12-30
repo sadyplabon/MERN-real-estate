@@ -4,6 +4,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/s
 import { app } from '../firebase';
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart, signOutUserSuccess, signOutUserFailure } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -121,12 +122,15 @@ export default function Profile() {
               ) : ("")
           }
         </p>
-        <input type="text" placeholder='username' defaultValue={currentUser.username} id='username' className='border p3 rounded-lg' onChange={handleChange}/>
-        <input type="email" placeholder='email' defaultValue={currentUser.email} id='email' className='border p3 rounded-lg' onChange={handleChange}/>
-        <input type="password" placeholder='password' id='password' className='border p3 rounded-lg' onChange={handleChange}/>
-        <button disabled={loading} className='bg-slate-700 text-white rounded-lg p3 uppercase hover:opacity-95 disabled:opacity-80'>
+        <input type="text" placeholder='username' defaultValue={currentUser.username} id='username' className='border p-3 rounded-lg' onChange={handleChange}/>
+        <input type="email" placeholder='email' defaultValue={currentUser.email} id='email' className='border p-3 rounded-lg' onChange={handleChange}/>
+        <input type="password" placeholder='password' id='password' className='border p-3 rounded-lg' onChange={handleChange}/>
+        <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? 'Loading...' : 'Update'}
         </button>
+        <Link to={"/create-listing"} className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95 disabled:opacity-80'>
+          Create Listing
+        </Link>
       </form>
       <div className='flex justify-between mt-1'>
         <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete account</span>
